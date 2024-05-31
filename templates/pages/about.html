@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock title %}
+
+{% block content %}
+<h1>Welcome</h1>
+<p>This is an about page that would have information about us and what our company is about, but considering we aren't an actual company, we'll let you use your imagination for what we are about.</p>
+<img src="{% static 'img/company-building.jpg' %}" alt="company">
+<p>here's a royalty free picture of a business buidling i found on the internet. that's all!</p>
+<img src="{% static 'img/ceo.jpg' %}" alt="ceo">
+<p>here is a picture of what our ceo might look like if we were a real company. yep!</p>
+{% endblock content %}
