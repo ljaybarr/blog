@@ -1,3 +1,14 @@
  -m venv venv && source venv/bin/activate && pip3 install django
 
  django-admin startproject config .
+
+ # how to make migrations
+ - python3 manage.py makemigrations posts
+ - python3 manage.py makemigrations posts --empty
+
+ # hot to apply migragtions
+ - python3 manage.py migrate
+
+ # how to create a super user account
+ - python3 manage.py createsuperuser
+ - register an email and password
