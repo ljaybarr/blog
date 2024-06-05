@@ -17,6 +17,24 @@ class PostListView(ListView):
     template_name = "posts/list.html"
     model = Post
     
+class DraftPostListView(LoginRequiredMixin, ListView):
+    template_name = "posts/list.html"
+    model = Post
+    
+    def get_context_data(self, **kwargs):
+        # Retrieve the context object (a kind of dictionary)
+        context = super().get_context_data(**kwargs)
+        # Retrieve the instance of Status that represents "draft" mode
+        draft_status = Status.objects.get(name="draft")
+        # Filter posts based on draft status and author (and order by created_on)
+        context["post_list"] = (
+            Post.objects
+            .filter(status=draft_status)
+            .filter(author=self.request.user)
+            .order_by("created_on").reverse()
+        )
+        return context
+    
 class PostDetailView(DetailView):
     template_name = "posts/detail.html"
     model = Post
