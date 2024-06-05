@@ -12,3 +12,6 @@
  # how to create a super user account
  - python3 manage.py createsuperuser
  - register an email and password
+
+# how to generate secret key tokens
+ - python3 -c "import secrets; print(secrets.token_urlsafe())"

@@ -27,23 +27,23 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     fields = ["title", "subtitle", "body", "status"]
     
     def form_valid(self, form):
-        from.instance.author = self.request.user
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
-    template_name : "posts/new.html"
+    template_name = "posts/new.html"
     model = Post
     fields = ["title", "subtitle", "body", "status"]
     
-    # def test_func(self):
-    #     post self.get_object()
-    #     return post.author == self.request.user
-
+    def test_func(self):
+        post = self.get_object()
+        return post.author == self.request.use
+    
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "posts/edit.html"
     model = Post
     success_url = reverse_lazy("list") # this should be the name of a url pattern!
 
-    # def test_func(self):
-    #     post self.get_object()
-    #     return post.author == self.request.user
+    def test_func(self):
+        post = self.get_object()
+        return post.author == self.request.user
