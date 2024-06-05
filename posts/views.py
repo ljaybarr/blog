@@ -10,12 +10,22 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin
 )
-from .models import Post
+from .models import Post, Status
 
 
 class PostListView(ListView):
     template_name = "posts/list.html"
     model = Post
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        published = Status.objects.get(name="published")
+        context["post_list"] = (
+            Post.objects
+            .filter(status=published)
+            .order_by("created_on").reverse()
+        )
+        return context
     
 class DraftPostListView(LoginRequiredMixin, ListView):
     template_name = "posts/list.html"
